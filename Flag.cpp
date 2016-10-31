@@ -15,11 +15,6 @@ bool Flag(LPCSTR path, bool ASLR, bool DEP)
 			PE.FileHeader->OptionalHeader.DllCharacteristics = IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE;
 		else // Disable address space layout randomization
 			PE.FileHeader->OptionalHeader.DllCharacteristics = NULL;
-
-		if (DEP) // Enable data execution prevention
-			PE.FileHeader->OptionalHeader.DllCharacteristics = IMAGE_DLLCHARACTERISTICS_NX_COMPAT;
-		else // Disable data execution prevention
-			PE.FileHeader->OptionalHeader.DllCharacteristics = NULL;
 		UnMapAndLoad(&PE);
 		return true;
 	}
